@@ -8,10 +8,10 @@ router.post('/', artistController.create);
 
 router.get('/', artistController.read);
 
-router.get('/:id', artistController.readOne);
+router.get('/artist/:id', artistController.readOne);
 
-router.patch('/:id', artistController.update);
+router.patch('/artist/:id', artistController.update);
 
-router.delete('/:id', artistController.delete);
+router.delete('/artist/:id', artistController.delete);
 
 module.exports = router;

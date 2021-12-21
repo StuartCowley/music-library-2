@@ -1,3 +1,7 @@
-Music Library API
+# Music Library API
 
-Creating music library api with MySQL which will allow us to Create, Read, Update and Delete items.
+## Backend Module for Manchester Codes
+
+Creating a Music Library API which works in conjunction with MySQL. Making use of RESTful standards to allow CRUD (Create, Read, Update and Delete) operations.
+
+API built using Node.js and Express to integrate MySQL functionality. Test Driven Development using Mocha testing framework.
