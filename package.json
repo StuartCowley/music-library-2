@@ -4,7 +4,8 @@
   "description": "Music Library API",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prestart": "node utils/create-database.js",
+    "start": "nodemon -r dotenv/config index.js"
   },
   "repository": {
     "type": "git",
@@ -18,11 +19,17 @@
   },
   "homepage": "https://github.com/naylfc90/music-library#readme",
   "devDependencies": {
+    "dotenv": "^10.0.0",
     "eslint": "^8.5.0",
     "eslint-config-airbnb": "^19.0.2",
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react": "^7.27.1",
-    "eslint-plugin-react-hooks": "^4.3.0"
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "express": "^4.17.2",
+    "mysql2": "^2.3.3"
   }
 }
