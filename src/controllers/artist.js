@@ -31,3 +31,22 @@ exports.read = async (req, res) => {
   }
   db.close();
 };
+
+exports.readOne = async (req, res) => {
+  const db = await getDb();
+  const id = req.params.id;
+
+  try {
+    const [[artist]] = await db.query(`SELECT * FROM Artist WHERE id = ?`, [
+      id,
+    ]);
+    if (artist) {
+      res.status(200).json(artist);
+    } else {
+      res.status(404).json({ error: 'The artist could not be found.' });
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
+  db.close();
+};
