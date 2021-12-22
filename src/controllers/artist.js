@@ -10,8 +10,7 @@ exports.create = async (req, res) => {
       name,
       genre,
     ]);
-
-    res.sendStatus(201);
+    res.status(201).send('Created artist');
   } catch (err) {
     res.sendStatus(500).json(err);
   }
@@ -19,13 +18,13 @@ exports.create = async (req, res) => {
   db.close();
 };
 
-exports.read = async (req, res) => {
+exports.read = async (_, res) => {
   const db = await getDb();
 
   try {
-    const artists = await db.query('SELECT * FROM Artist');
+    const [artists] = await db.query('SELECT * FROM Artist');
 
-    res.status(200).json(artists[0]);
+    res.status(200).json(artists);
   } catch (err) {
     res.status(500).json(err);
   }
