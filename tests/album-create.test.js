@@ -5,6 +5,7 @@ const getDb = require('../src/services/db');
 const app = require('../src/app');
 
 describe('create album', () => {
+  //first create a new artist to use in album table
   let artist;
   let db;
   beforeEach(async () => {
@@ -15,7 +16,9 @@ describe('create album', () => {
     ]);
     [artist] = await db.query(`SELECT * FROM Artist`);
   });
+
   afterEach(async () => {
+    //delete all from album table after testing
     await db.query('DELETE FROM Album');
     await db.close();
   });
