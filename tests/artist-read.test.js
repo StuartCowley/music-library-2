@@ -13,15 +13,15 @@ describe('read artist', () => {
     await Promise.all([
       db.query('INSERT INTO Artist (name, genre) VALUES(?, ?)', [
         'Tame Impala',
-        'rock',
+        'Rock',
       ]),
       db.query('INSERT INTO Artist (name, genre) VALUES(?, ?)', [
         'Kylie Minogue',
-        'pop',
+        'Pop',
       ]),
       db.query('INSERT INTO Artist (name, genre) VALUES(?, ?)', [
         'Dave Brubeck',
-        'jazz',
+        'Jazz',
       ]),
     ]);
 
@@ -36,7 +36,7 @@ describe('read artist', () => {
   describe('/artist', () => {
     describe('GET', () => {
       it('returns all artist records in the database', async () => {
-        const res = await request(app).get('/artist').send();
+        const res = await request(app).get('/artist');
 
         expect(res.status).to.equal(200);
         expect(res.body.length).to.equal(3);
@@ -54,14 +54,14 @@ describe('read artist', () => {
     describe('GET', () => {
       it('returns a single artist with the correct id', async () => {
         const expected = artists[0];
-        const res = await request(app).get(`/artist/${expected.id}`).send();
+        const res = await request(app).get(`/artist/${expected.id}`);
 
         expect(res.status).to.equal(200);
         expect(res.body).to.deep.equal(expected);
       });
 
       it('returns a 404 if the artist is not in the database', async () => {
-        const res = await request(app).get('/artist/999999').send();
+        const res = await request(app).get('/artist/999999');
 
         expect(res.status).to.equal(404);
       });

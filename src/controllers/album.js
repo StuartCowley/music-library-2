@@ -15,6 +15,18 @@ exports.create = async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
+  db.close();
+};
 
+exports.read = async (_, res) => {
+  const db = await getDb();
+
+  try {
+    const [albums] = await db.query('SELECT * FROM Album');
+
+    res.status(200).json(albums);
+  } catch (err) {
+    res.status(500).json(err);
+  }
   db.close();
 };

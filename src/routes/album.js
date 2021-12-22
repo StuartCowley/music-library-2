@@ -6,4 +6,6 @@ const albumRouter = express.Router();
 
 albumRouter.post('/artist/:id/album', albumController.create);
 
+albumRouter.get('/album', albumController.read);
+
 module.exports = albumRouter;
