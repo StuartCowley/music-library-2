@@ -31,17 +31,17 @@ describe('create album', () => {
           .post(`/artist/${artistId.id}/album`)
           .send({
             name: 'Currents',
-            year: '2015',
+            year: 2015,
           });
-        console.log({ artistId });
+
         expect(res.status).to.equal(201);
 
-        const [[albumEntries]] = await db.query(
-          'SELECT * FROM Album where artistId = ?'[artistId]
+        const [albumEntries] = await db.query(
+          'SELECT * FROM Album where artistId = ?',
+          [artistId.id]
         );
-
-        expect(albumEntries.name).to.equal('Currents');
-        expect(albumEntries.year).to.equal(2015);
+        expect(albumEntries[0].name).to.equal('Currents');
+        expect(albumEntries[0].year).to.equal(2015);
       });
     });
   });

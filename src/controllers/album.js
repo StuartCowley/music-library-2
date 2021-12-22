@@ -11,7 +11,7 @@ exports.create = async (req, res) => {
       `INSERT INTO Album (name, year, artistId) VALUES (?, ?, ?)`,
       [name, year, artistId]
     );
-    res.status(201).send('Created Album');
+    res.status(201).send('Album Created');
   } catch (err) {
     res.status(500).json(err);
   }

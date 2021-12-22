@@ -10,7 +10,8 @@ exports.create = async (req, res) => {
       name,
       genre,
     ]);
-    res.status(201).send('Created artist');
+
+    res.status(201).send('Artist Created');
   } catch (err) {
     res.sendStatus(500).json(err);
   }
@@ -63,7 +64,7 @@ exports.update = async (req, res) => {
 
     if (artist) {
       await db.query(`UPDATE Artist SET ? WHERE id = ?`, [userInput, id]);
-      res.sendStatus(200);
+      res.status(200).send('Artist Updated');
     } else {
       res.sendStatus(404);
     }
@@ -84,7 +85,7 @@ exports.delete = async (req, res) => {
 
     if (artist) {
       await db.query(`DELETE FROM Artist WHERE id = ?`, [id]);
-      res.sendStatus(200);
+      res.status(200).send('Artist Deleted');
     } else {
       res.sendStatus(404);
     }
