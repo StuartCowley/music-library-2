@@ -26,15 +26,19 @@ describe('create album', () => {
   describe('/artist/:id/album', () => {
     describe('POST', () => {
       it('creates a new album in the database', async () => {
-        const id = artist.id;
-        const res = await request(app).post(`/artist/${id}/album`).send({
-          name: 'Currents',
-          year: '2015',
-        });
-
+        const artistId = artist[0];
+        const res = await request(app)
+          .post(`/artist/${artistId.id}/album`)
+          .send({
+            name: 'Currents',
+            year: '2015',
+          });
+        console.log({ artistId });
         expect(res.status).to.equal(201);
 
-        const [[albumEntries]] = await db.query('SELECT * FROM Album');
+        const [[albumEntries]] = await db.query(
+          'SELECT * FROM Album where artistId = ?'[artistId]
+        );
 
         expect(albumEntries.name).to.equal('Currents');
         expect(albumEntries.year).to.equal(2015);

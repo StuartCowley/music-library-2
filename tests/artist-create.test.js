@@ -9,8 +9,8 @@ describe('create artist', () => {
   beforeEach(async () => (db = await getDb()));
 
   afterEach(async () => {
-    // await db.query('DELETE FROM Artist');
-    // await db.close();
+    await db.query('DELETE FROM Artist');
+    await db.close();
   });
 
   describe('/artist', () => {
