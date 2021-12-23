@@ -30,3 +30,41 @@ exports.read = async (_, res) => {
   }
   db.close();
 };
+
+exports.readOne = async (req, res) => {
+  const db = await getDb();
+  const id = req.params.id;
+
+  try {
+    const [[album]] = await db.query(`SELECT * FROM Album WHERE id = ?`, [id]);
+
+    if (album) {
+      res.status(200).json(album);
+    } else {
+      res.status(404).json({ error: 'The album could not be found.' });
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
+  db.close();
+};
+
+exports.update = async (req, res) => {
+  const db = await getDb();
+  const id = req.params.id;
+  const userInput = req.body;
+
+  try {
+    const [[album]] = await db.query(`SELECT * FROM Album WHERE id = ?`, [id]);
+
+    if (album) {
+      await db.query(`UPDATE Album SET ? WHERE id = ?`, [userInput, id]);
+      res.status(200).send('Album Updated');
+    } else {
+      res.sendStatus(404);
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
+  db.close();
+};

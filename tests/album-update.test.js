@@ -1,10 +1,10 @@
-// tests/album-read.test.js
+// tests/album-update.test.js
 const { expect } = require('chai');
 const request = require('supertest');
 const getDb = require('../src/services/db');
 const app = require('../src/app');
 
-describe('read album', () => {
+describe('update album', () => {
   let db;
   let albums;
 
@@ -67,35 +67,28 @@ describe('read album', () => {
     await db.close();
   });
 
-  describe('/album', () => {
-    describe('GET', () => {
-      it('returns all album records in the database', async () => {
-        const res = await request(app).get('/album');
-
-        expect(res.status).to.equal(200);
-        expect(res.body.length).to.equal(3);
-
-        res.body.forEach((albumRecord) => {
-          const expected = albums.find((a) => a.id === albumRecord.id);
-
-          expect(albumRecord).to.deep.equal(expected);
-        });
-      });
-    });
-  });
-
   describe('/album/:id', () => {
-    describe('GET', () => {
-      it('returns a single artist with the correct id', async () => {
-        const expected = albums[0];
-        const res = await request(app).get(`/album/${expected.id}`);
+    describe('PATCH', () => {
+      it('updates a single album with the correct id', async () => {
+        const album = albums[0];
+        const res = await request(app)
+          .patch(`/album/${album.id}`)
+          .send({ name: 'new name', year: 2000 });
 
         expect(res.status).to.equal(200);
-        expect(res.body).to.deep.equal(expected);
+
+        const [[newAlbumRecord]] = await db.query(
+          'SELECT * FROM Album WHERE id = ?',
+          [album.id]
+        );
+
+        expect(newAlbumRecord.name).to.equal('new name');
       });
 
       it('returns a 404 if the artist is not in the database', async () => {
-        const res = await request(app).get('/album/999999');
+        const res = await request(app)
+          .patch('/album/999999')
+          .send({ name: 'new name' });
 
         expect(res.status).to.equal(404);
       });
