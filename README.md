@@ -10,19 +10,19 @@ API built using Node.js and Express to integrate MySQL functionality. Test Drive
 
 ### Artist
 
-Create Artist - POST to '/artist'
-Read all Artists - GET from '/artist'
-Read one Artist ID - GET from '/artist/:id'
-Update Artist - PATCH '/artist/:id'
-Delete Artist - DELETE '/artist/:id'
+- Create Artist - POST to '/artist'
+- Read all Artists - GET from '/artist'
+- Read one Artist ID - GET from '/artist/:id'
+- Update Artist - PATCH '/artist/:id'
+- Delete Artist - DELETE '/artist/:id'
 
 ### Album
 
-Create Album - POST to '/album'
-Read all Albums - GET from '/album'
-Read one Album ID - GET from '/album/:id'
-Update Album - PATCH '/album/:id'
-Delete Album - DELETE '/album/:id'
+- Create Album - POST to '/album'
+- Read all Albums - GET from '/album'
+- Read one Album ID - GET from '/album/:id'
+- Update Album - PATCH '/album/:id'
+- Delete Album - DELETE '/album/:id'
 
 ## Instructions
 
